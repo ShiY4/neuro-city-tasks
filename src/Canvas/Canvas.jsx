@@ -1,6 +1,6 @@
 import React from 'react';
 import { saveAs } from 'file-saver';
-import './Canvas.css';
+import './Canvas.css'
 
 export default class Canvas extends React.Component{
 
@@ -48,18 +48,19 @@ export default class Canvas extends React.Component{
         case 180:
           canvas.width = img.width;
           canvas.height = img.height;
-          if (rotation === 180) {
-            ctx.rotate((180 * Math.PI) / 180);
-            ctx.drawImage(img, -img.width, -img.height);
-          } else {
-            ctx.drawImage(img, 0, 0);
-          }
+          ctx.rotate((180 * Math.PI) / 180);
+          ctx.drawImage(img, -img.width, -img.height);
+          break;
+        case 0:
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
           break;
         default:
           console.log("default");
       }
       canvas.toBlob((blob) => {
-        saveAs(blob, `${image.name}_rotated_on_${rotation}deg`);
+        saveAs(blob, `rotated_on_${rotation}deg${image.name}`);
       });
     };
   };
@@ -68,18 +69,25 @@ export default class Canvas extends React.Component{
   render() {
     const { imageSrc, rotation } = this.state
     return (
-      <div className="container" style={{ textAlign: 'center', padding: '20px' }}>
-        <h1>Image Rotator</h1>
-        <input type="file" onChange={this.handleImageChange} accept="image/png, image/jpeg" />
+      <div className="canvas-container" style={{ textAlign: 'center', padding: '20px' }}>
+        <h1 className='canvas-title'>Вращение изображений</h1>
+        <form method="post" enctype="multipart/form-data">
+          <label className='canvas-input'>
+	   	      <input className='canvas-input__input' type="file" name="file" onChange={this.handleImageChange} accept="image/png, image/jpeg"/>		
+	   	      <span className='canvas-input__span'>Выберите файл</span>
+ 	        </label>
+        </form>
         {imageSrc && (
-          <div>
-            <h2>Preview:</h2>
-            <div style={{ transform: `rotate(${rotation}deg)`, display: 'inline-block' }}>
-              <img src={imageSrc} alt="Preview" style={{ maxWidth: '100%', maxHeight: '300px' }} />
-            </div>
+          <div className='canvas-main'>
             <div>
-              <button onClick={this.handleRotate}>Rotate 90°</button>
-              <button onClick={this.handleSave}>Save Rotated Image</button>
+              <h2 className='canvas-subtitle'>Предпросмотр:</h2>
+              <div>
+                <button className='canvas-button' onClick={this.handleRotate}>Вращать</button>
+                <button className='canvas-button' onClick={this.handleSave}>Сохранить</button>
+              </div>
+            </div>
+            <div className='canvas-img' style={{ transform: `rotate(${rotation}deg)`, display: 'block' }}>
+              <img src={imageSrc} alt="Preview" style={{ maxWidth: '50%', maxHeight: '300px',  }} />
             </div>
           </div>
         )}

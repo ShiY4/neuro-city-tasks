@@ -1,14 +1,14 @@
 html{
   box-sizing: border-box;
+  font-family: "Overpass Mono";
 }
 
 *, *::after, *::before{
-  box-sizing: inherit;
   margin: 0;
 }
 
-.container{
-  margin: 150px 0;
+.slider-container{
+  margin-top: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,11 +19,12 @@ html{
 }
 
 .slider{
-  height: 280px;
+  height: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid rgb(255, 219, 164);
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 .window{
@@ -34,19 +35,23 @@ html{
 .all-cards-container{
   display: flex;
   flex-direction: row;
-
+  gap: 10px;
   transition: translate;
   transition-property: transform;
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
 }
 
+.all-cards-container:first-child{
+  margin-left: 0;
+}
+
 .card{
   display: flex;
-  margin: 0 5px;
   flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
+  
 }
 
 .card-content{
@@ -54,30 +59,62 @@ html{
   
 }
 
-.card-content__last-email{
+.card-content__email{
   word-wrap: break-word;
+  text-decoration: none;
+  color: rgb(21, 156, 156);
+}
+
+.card-content__email:hover{
+  color: rgb(23, 197, 197);
 } 
 
 .card__img-cont{
   display: flex;
+  
 }
 
 .card__img{
+  z-index: -1;
   height: 170px;
   width: 170px;
 }
 
 .button{
-  background-color: none;
-  cursor: pointer;
-  height: 100%;
-  border: none;
-  color: black;
-  transition: 0.3s;
+  width: 50px;
+  height: 48px;
+  margin: 0 10px;
+}
+
+.button_right{
+  margin-right: 10px;
+}
+
+.button_left{
+  margin-left: 10px;
 }
 
 .button:hover{
+  color: rgb(121, 121, 121);
+  border-radius: 100px;
+}
+
+.custom-select{
+  background: rgb(230, 230, 230);
+  border-radius: 15px;
+  padding: 5px 5px 5px 15px;
+  cursor: pointer;
+  border: none;
+  justify-content: center;
+}
+
+.custom-select:hover{
   color: white;
-  background-color: black;
-  transition: 0.3s;
+  background: black;
+}
+
+.custom-select > option{
+  background: rgb(230, 230, 230);
+  color: black;
+  border: none;
 }

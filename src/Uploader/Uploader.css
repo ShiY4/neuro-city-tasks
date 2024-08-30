@@ -3,13 +3,48 @@ html{
 }
 
 *, *::after, *::before{
-	box-sizing: inherit;
 	margin: 0;
 }
 
-.container{
+.uploader-container{
 	margin-top: 150px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+	align-content: center;
+}
+
+.uploader-button{
+	margin: 10px;
+	width: 150px;
+	padding: 10px 15px;
+	background-color: rgb(230, 230, 230);
+	cursor: pointer;
+	height: 100%;
+	border: none;
+	border-radius: 15px;
+	color: black;
+	transition: 0.3s;
+	font-family: "Overpass Mono";
+}
+  
+.uploader-button:hover{
+	color: white;
+	background-color: black;
+	transition: 0.3s;
+}
+
+.uploader-title{
+	font-family: "Overpass Mono";
+}
+
+.uploader-status__title{
+	font-family: "Overpass Mono";
+}
+
+.uploader-status__progress{
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
 }

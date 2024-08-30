@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './Uploader.css';
 
+
 export default class Uploader extends React.Component{
 
   constructor(props){
@@ -112,17 +113,26 @@ export default class Uploader extends React.Component{
 
   render() {
     return (
-      <div className='container'>
-        <h1>Загрузчик файлов</h1>
-            <button onClick={this.downloadFiles} disabled={this.state.downloading}>
-                {this.state.downloading ? 'Скачивание...' : 'Скачать все'}
-            </button>
-            {this.state.progress.map((percent, index) => (
-                <div key={index}>
-                    <p>Файл {index + 1}: {percent}%</p>
-                    <progress value={percent} max="100" />
+      <div className="uploader-container">
+        <h1 className='uploader-title'>Загрузчик файлов</h1>
+        <button 
+          className="uploader-button"
+          onClick={this.downloadFiles}
+          disabled={this.state.downloading}
+        >
+          {this.state.downloading ? 'Скачивание...' : 'Скачать все'}
+        </button>
+        {this.state.progress.map((percent, index) => (
+            <div className='uploader-status' key={index}>
+                <p className='uploader-status__title'>Файл {index + 1}: {percent}%</p>
+                <div className='uploader-status__progress'>
+                  <progress value={percent} max="100" />
+                  <input type="checkbox" id="downloaded" name="downloaded"  checked={percent === 100 ? true : false}/>
+                  <label for="downloaded"></label>
                 </div>
-            ))}
+            </div>
+            
+        ))}
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Slider.css';
 import { uniqueId } from 'lodash';
-
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 export default class Slider extends React.Component {
 
   constructor(props) {
@@ -40,7 +40,7 @@ export default class Slider extends React.Component {
             <div className='card-content'>
               <h1 className='card-content__first-name'>{card.first_name}</h1>
               <h1 className='card-content__last-name'>{card.last_name}</h1>
-              <a className='card-content__last-email' href="a">{card.email}</a>
+              <a className='card-content__email' href="a">{card.email}</a>
             </div>
           </div>
         )
@@ -77,23 +77,23 @@ export default class Slider extends React.Component {
   render() {
     const { cardsToShow, offset } = this.state
     return (
-      <div className='container'>
+      <div className='slider-container'>
         <div className='selector'>
-          <label>Select number of cards to show: </label>
-          <select value={cardsToShow} onChange={this.setCardsToShow}>
+          <label>Количество отображаемых карточек: </label>
+          <select className='custom-select' value={cardsToShow} onChange={this.setCardsToShow}>
               <option value={1}>1</option>
               <option value={2}>2</option>
               <option value={3}>3</option>
           </select>
         </div>
-        <div className='slider' style={{width: `${270 * cardsToShow}px`}}>
-        <button className='button' onClick={this.prevSlide}>Prev</button>
+        <div className='slider' style={{width: `${300 * cardsToShow}px`}}>
+        <FaArrowAltCircleLeft className='button button_left' onClick={this.prevSlide}/>
         <div className='window' style={{width: `${180 * cardsToShow}px`}}>
           <div className="all-cards-container" style={{ transform: `translateX(${offset}px)` }}>
             {this.renderItems()}
           </div>
         </div>
-        <button className='button' onClick={this.nextSlide}>Next</button>
+        <FaArrowAltCircleRight className='button button_right' onClick={this.nextSlide}/>
       </div>
       </div>
     )
